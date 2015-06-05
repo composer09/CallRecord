@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/CallRecord.iml" filepath="$PROJECT_DIR$/CallRecord.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CallRecordApp/CallRecordApp.iml" filepath="$PROJECT_DIR$/CallRecordApp/CallRecordApp.iml" />
+    </modules>
+  </component>
+</project>
