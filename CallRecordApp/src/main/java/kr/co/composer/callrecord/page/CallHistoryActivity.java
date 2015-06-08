@@ -3,11 +3,10 @@ package kr.co.composer.callrecord.page;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.ActionMode;
 import android.view.Menu;
@@ -15,12 +14,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView.MultiChoiceModeListener;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import kr.co.composer.callrecord.R;
@@ -75,11 +72,38 @@ public class CallHistoryActivity extends Activity {
 		listView.setAdapter(historyAdapter);
 		listView.setDivider(null);
 		listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
+
+		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position,
+									long positionL) {
+				File fileName = callDAO.selectFile(view.getId());
+				Intent audioStartIntent = new Intent(android.content.Intent.ACTION_VIEW);
+				audioStartIntent.setDataAndType(Uri.fromFile(fileName), "audio/*");
+				CallHistoryActivity.this.startActivity(audioStartIntent);
+//					else{
+//						if(configPreferenceManager.getPathFormat().contains("mp4")){
+//							File file2 = new File(audioRecorder.excuteFile(fileName+".3gp"));
+//							Intent audioStartIntent = new Intent(android.content.Intent.ACTION_VIEW);
+//							audioStartIntent.setDataAndType(Uri.fromFile(file2), "audio/*");
+//							CallHistoryActivity.this.startActivity(audioStartIntent);}
+//						if(configPreferenceManager.getPathFormat().contains("3gp")){
+//							File file2 = new File(audioRecorder.excuteFile(fileName+".mp4"));
+//							Intent audioStartIntent = new Intent(android.content.Intent.ACTION_VIEW);
+//							audioStartIntent.setDataAndType(Uri.fromFile(file2), "audio/*");
+//							CallHistoryActivity.this.startActivity(audioStartIntent);}
+//						}
+			}
+
+		});
+
+
 		listView.setMultiChoiceModeListener(new MultiChoiceModeListener() {
-			
+
 			@Override
 			public void onItemCheckedStateChanged(ActionMode mode, int position,
-					long id, boolean checked) {
+												  long id, boolean checked) {
 				// Capture total checked items
 				final int checkedCount = listView.getCheckedItemCount();
 				// Set the CAB title according to total checked items
@@ -89,7 +113,7 @@ public class CallHistoryActivity extends Activity {
 //				Log.i("아이템확인",String.valueOf(id));
 				historyAdapter.toggleSelection(position);
 			}
-			
+
 			@Override
 			public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
 				switch (item.getItemId()) {
@@ -103,7 +127,7 @@ public class CallHistoryActivity extends Activity {
 							Call selecteditem = historyAdapter
 									.getItem(selected.keyAt(i));
 							// Remove selected items following the ids
-							historyAdapter.remove(selecteditem);
+//							historyAdapter.remove(selecteditem);
 						}
 					}
 					// Close CAB
@@ -138,62 +162,6 @@ public class CallHistoryActivity extends Activity {
 			}
 		});
 		
-		
-		
-		
-		
-		
-		
-		listView.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position,
-					long positionL) {
-					playFileName = callDAO.selectFile(view.getId());
-					Log.i("audioFileName", playFileName.toString());
-					
-//					Intent audioStartIntent = new Intent(android.content.Intent.ACTION_VIEW);
-					MediaPlayer player = new MediaPlayer();
-					try {
-						player.setDataSource(playFileName.toString());
-						player.prepare();
-					} catch (IllegalStateException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					player.start();
-					
-					
-//				    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && isMediaDocument(Uri.fromFile(playFileName)))
-//				    {
-//				        final String docId = DocumentsContract.getDocumentId(Uri.fromFile(playFileName));
-//				        System.out.println("스트링확인: "+docId);
-//				        final String[] split = docId.split(":");
-//				        final String type = split[0];
-//
-//				        Uri contentUri = null;
-//				        if ("audio".equals(type)) 
-//				        {
-//				            contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
-//				        }
-//
-//				        final String selection = "_id=?";
-//				        final String[] selectionArgs = new String[] {
-//				                split[1]
-//				        };
-//
-//				        filePath = getDataColumn(getBaseContext(), contentUri, selection, selectionArgs);
-//				    }
-//				    System.out.println("파일패스확인 : "+filePath);
-//					audioStartIntent.setDataAndType(Uri.parse(filePath), "audio/*");
-					
-//					audioStartIntent.setDataAndType(Uri.fromFile(playFileName), "audio/*");
-//					CallHistoryActivity.this.startActivity(audioStartIntent);
-					}
-		});
 	}
 	
 	//롤리팝 이후 파일

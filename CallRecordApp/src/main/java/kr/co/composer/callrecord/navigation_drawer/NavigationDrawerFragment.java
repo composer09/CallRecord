@@ -12,6 +12,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -77,7 +78,7 @@ public class NavigationDrawerFragment extends Fragment {
         mUserLearnedDrawer = sp.getBoolean(PREF_USER_LEARNED_DRAWER, false);
 
 
-        if(savedInstanceState != null) {
+        if (savedInstanceState != null) {
             mCurrentSelectedPosition = savedInstanceState.getInt(STATE_SELECTED_POSITION);
             mFromSavedInstanceState = true;
         }
@@ -209,20 +210,23 @@ public class NavigationDrawerFragment extends Fragment {
         }
 
         FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-        Toast.makeText(getActivity(), position+1 + "번 페이지로 이동", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), position + 1 + "번 페이지로 이동", Toast.LENGTH_SHORT).show();
 
         switch (position) {
             case 0:
                 fragmentTransaction.replace(R.id.container, FragmentPage01.newInstance(position))
                         .commit();
+                Log.i("clickPage", position + "");
                 break;
             case 1:
                 fragmentTransaction.replace(R.id.container, FragmentPage02.newInstance(position))
                         .commit();
+                Log.i("clickPage", position + "");
                 break;
             case 2:
                 fragmentTransaction.replace(R.id.container, FragmentPage03.newInstance(position))
                         .commit();
+                Log.i("clickPage", position + "");
                 break;
 
         }
@@ -274,8 +278,8 @@ public class NavigationDrawerFragment extends Fragment {
             return true;
         }
 
-        if (item.getItemId() == R.id.action_example) {
-            Toast.makeText(getActivity(), "Example action.", Toast.LENGTH_SHORT).show();
+        if (item.getItemId() == R.id.refresh) {
+            Toast.makeText(getActivity(), "Refresh", Toast.LENGTH_SHORT).show();
             return true;
         }
 

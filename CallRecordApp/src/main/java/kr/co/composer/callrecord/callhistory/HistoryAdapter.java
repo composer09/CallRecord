@@ -1,9 +1,7 @@
 package kr.co.composer.callrecord.callhistory;
 
-import android.app.Activity;
 import android.content.ContentUris;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
@@ -31,7 +29,6 @@ import java.util.ArrayList;
 import kr.co.composer.callrecord.R;
 import kr.co.composer.callrecord.bo.Call;
 import kr.co.composer.callrecord.dao.record.CallDAO;
-import kr.co.composer.callrecord.page.CallHistoryActivity;
 import kr.co.composer.callrecord.recorder.AudioRecorder;
 import kr.co.composer.callrecord.sharedpref.ConfigPreferenceManager;
 
@@ -117,14 +114,14 @@ public class HistoryAdapter extends BaseAdapter {
 		callDAO.deleteCallV2(call.getRowId());
 		if (fileName.exists()) {
 			fileName.delete();
-		} 
-		((Activity) this.context).finish();
-		Intent refresh = new Intent(this.context,
-				CallHistoryActivity.class);
-		refresh.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		((Activity) this.context).overridePendingTransition(
-				R.anim.fade_history, R.anim.hold_history);
-		this.context.startActivity(refresh);
+		}
+//		((Activity)this.context).finish();
+//		Intent refresh = new Intent(this.context,
+//				MainActivity.class);
+//		refresh.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//		((Activity) this.context).overridePendingTransition(
+//				R.anim.fade_history, R.anim.hold_history);
+//		this.context.startActivity(refresh);
 	}
 	
 	

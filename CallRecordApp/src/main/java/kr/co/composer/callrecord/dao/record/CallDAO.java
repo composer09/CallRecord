@@ -22,6 +22,7 @@ public class CallDAO {
 	String rowId;
 	
 	public CallDAO(Context context){
+
 		this.callDatabaseHelper = new CallDatabaseHelper(context);
 	}
 	

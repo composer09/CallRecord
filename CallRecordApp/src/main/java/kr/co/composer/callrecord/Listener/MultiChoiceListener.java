@@ -1,8 +1,5 @@
 package kr.co.composer.callrecord.Listener;
 
-import kr.co.composer.callrecord.R;
-import kr.co.composer.callrecord.bo.Call;
-import kr.co.composer.callrecord.callhistory.HistoryAdapter;
 import android.content.Context;
 import android.util.SparseBooleanArray;
 import android.view.ActionMode;
@@ -11,6 +8,10 @@ import android.view.MenuItem;
 import android.widget.AbsListView.MultiChoiceModeListener;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import kr.co.composer.callrecord.R;
+import kr.co.composer.callrecord.bo.Call;
+import kr.co.composer.callrecord.callhistory.HistoryAdapter;
 
 public class MultiChoiceListener implements MultiChoiceModeListener{
 	private Context context;
@@ -49,7 +50,7 @@ public class MultiChoiceListener implements MultiChoiceModeListener{
 					Call selecteditem = historyAdapter
 							.getItem(selected.keyAt(i));
 					// Remove selected items following the ids
-					historyAdapter.remove(selecteditem);
+//					historyAdapter.remove(selecteditem);
 				}
 			}
 			// Close CAB
