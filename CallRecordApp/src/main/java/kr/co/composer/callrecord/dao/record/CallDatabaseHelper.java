@@ -18,7 +18,6 @@ public class CallDatabaseHelper extends SQLiteOpenHelper {
 	public static final String START_TIME = "startTime";
 	public static final String END_TIME = "endTime";
 	public static final String SEND_RECEIVE = "sendReceive";
-	public static final String CONTACT_ID = "contactID";
 	public static final String FILE_NAME = "fileName";
 	
 	public CallDatabaseHelper(Context context){
@@ -34,7 +33,6 @@ public class CallDatabaseHelper extends SQLiteOpenHelper {
 				+ START_TIME + " varchar, "
 				+ CALL_TIME + " varchar, "
 				+ SEND_RECEIVE + " varchar, "
-				+ CONTACT_ID + " int, "
 				+ FILE_NAME + " varchar"
 				+");";
 		Log.i("데이터베이스 테이블생성", sql);

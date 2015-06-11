@@ -2,6 +2,7 @@ package kr.co.composer.callrecord.callhistory;
 
 import android.content.ContentUris;
 import android.content.Context;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
@@ -46,7 +47,8 @@ public class HistoryAdapter extends BaseAdapter {
     private SparseBooleanArray mSelectedItemsIds;
 
     ImageView imageView;
-    Bitmap bitmap;
+
+    int photoId;
 
     public HistoryAdapter(Context context, int layout, ArrayList<Call> arraySrc) {
         this.context = context;
@@ -130,14 +132,33 @@ public class HistoryAdapter extends BaseAdapter {
             convertView = inflater.inflate(layout, parentView, false);
         }
 
-        if (arraySrc.get(position).getCallerID() != 1) {
-            imageView = (ImageView) convertView.findViewById(R.id.caller_image);
-            imageView.setImageBitmap(getThumbnail(arraySrc.get(position).getCallerID()));
-        } else if (arraySrc.get(position).getCallerID() == 1) {
-            Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.contact_image);
-            imageView = (ImageView) convertView.findViewById(R.id.caller_image);
-            imageView.setImageBitmap(getCircleBitmap(bitmap));
+        Uri uri = Uri.withAppendedPath(
+                ContactsContract.PhoneLookup.CONTENT_FILTER_URI,
+                Uri.encode(arraySrc.get(position).getPhoneNumber()));
+        String[] projection = new String[]{ContactsContract.Contacts.PHOTO_ID};
+
+        // Query the filter URI
+        Cursor cursor = context.getContentResolver().query(uri,
+                projection, null, null, null);
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                photoId = cursor.getInt(cursor.getColumnIndex(ContactsContract.Contacts.PHOTO_ID));
+                if (photoId != 0) {
+                    imageView = (ImageView) convertView.findViewById(R.id.caller_image);
+                    imageView.setImageBitmap(getThumbnail(photoId));
+                } else {
+                    Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.contact_image);
+                    imageView = (ImageView) convertView.findViewById(R.id.caller_image);
+                    imageView.setImageBitmap(getCircleBitmap(bitmap));
+                }
+            } else {
+                Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.contact_image);
+                imageView = (ImageView) convertView.findViewById(R.id.caller_image);
+                imageView.setImageBitmap(getCircleBitmap(bitmap));
+            }
         }
+        cursor.close();
+
 
         TextView name = (TextView) convertView
                 .findViewById(R.id.caller_name_list);
@@ -187,6 +208,13 @@ public class HistoryAdapter extends BaseAdapter {
     }
 
     private Bitmap getThumbnail(int thumbnailId) {
+        new Thread(){
+            @Override
+            public void run() {
+
+            }
+        };
+
         Uri uri = ContentUris.withAppendedId(ContactsContract.Data.CONTENT_URI, thumbnailId);
         InputStream input = null;
         try {
