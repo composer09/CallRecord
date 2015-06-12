@@ -1,7 +1,5 @@
 package kr.co.composer.callrecord.sharedpref;
 
-import kr.co.composer.callrecord.callbroadcast.CallBroadcast;
-
 public class CallInfoPreferenceManager extends AbstractPreferenceManager{
 	private static CallInfoPreferenceManager mSelfInstance = null;
 	
@@ -62,10 +60,6 @@ public class CallInfoPreferenceManager extends AbstractPreferenceManager{
 		setBooleanValue(CALL_STATE, state);
 	}
 	
-	public void setContactId(int name){
-		setIntValue(CONTACT_ID, name);
-	}
-	
 //	public long getStartDate(){
 //		return getLongValue(START_DATE, 0L);
 //	}
@@ -100,10 +94,6 @@ public class CallInfoPreferenceManager extends AbstractPreferenceManager{
 	
 	public boolean getCallState(){
 		return getBooleanValue(CALL_STATE, true);
-	}
-	
-	public int getContactId(){
-		return getIntValue(CONTACT_ID, 1);
 	}
 	
 }

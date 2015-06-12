@@ -22,6 +22,7 @@ public class CallDAO {
 	String rowId;
 	
 	public CallDAO(Context context){
+
 		this.callDatabaseHelper = new CallDatabaseHelper(context);
 	}
 	
@@ -30,15 +31,14 @@ public class CallDAO {
 //	}
 	
 	
-	public void insert(String name, String number, String startTime, String callTime, String sendReceive, int id
-			, String fileName) {
+	public void insert(String name, String number, String startTime, String callTime, String sendReceive
+			,String fileName) {
 		ContentValues contVal = new ContentValues();
 		contVal.put(CallDatabaseHelper.NAME, name);
 		contVal.put(CallDatabaseHelper.PHONE_NUMBER, number);
 		contVal.put(CallDatabaseHelper.START_TIME, startTime);
 		contVal.put(CallDatabaseHelper.CALL_TIME, callTime);
 		contVal.put(CallDatabaseHelper.SEND_RECEIVE, sendReceive);
-		contVal.put(CallDatabaseHelper.CONTACT_ID, id);
 		contVal.put(CallDatabaseHelper.FILE_NAME, fileName);
 		db = callDatabaseHelper.getWritableDatabase();
 		db.insert(CallDatabaseHelper.TABLE_NAME, null, contVal);
@@ -121,10 +121,7 @@ public class CallDAO {
 				
 				columnIndex = cursor.getColumnIndex(CallDatabaseHelper.SEND_RECEIVE);
 				call.setSendReceive(cursor.getString(columnIndex));
-				
-				columnIndex = cursor.getColumnIndex(CallDatabaseHelper.CONTACT_ID);
-				call.setCallerID(cursor.getInt(columnIndex));
-				
+
 				columnIndex = cursor.getColumnIndex(CallDatabaseHelper.FILE_NAME);
 				call.setFileName(cursor.getString(columnIndex));
 				

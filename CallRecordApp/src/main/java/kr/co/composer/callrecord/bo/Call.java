@@ -38,14 +38,6 @@ public class Call {
 		this.rowId = rowId;
 	}
 	
-	public int getCallerID() {
-		return callerID;
-	}
-
-	public void setCallerID(int callerID){
-		this.callerID = callerID;
-	}
-
 	public String getFileName(){
 		return fileName;
 	}

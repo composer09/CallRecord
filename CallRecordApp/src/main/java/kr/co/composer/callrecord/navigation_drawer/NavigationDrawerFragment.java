@@ -1,6 +1,7 @@
 package kr.co.composer.callrecord.navigation_drawer;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -24,7 +26,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import kr.co.composer.callrecord.R;
-import kr.co.composer.callrecord.page.FragmentPage01;
+import kr.co.composer.callrecord.page.ConfigurationActivity;
 import kr.co.composer.callrecord.page.FragmentPage02;
 import kr.co.composer.callrecord.page.FragmentPage03;
 
@@ -77,7 +79,7 @@ public class NavigationDrawerFragment extends Fragment {
         mUserLearnedDrawer = sp.getBoolean(PREF_USER_LEARNED_DRAWER, false);
 
 
-        if(savedInstanceState != null) {
+        if (savedInstanceState != null) {
             mCurrentSelectedPosition = savedInstanceState.getInt(STATE_SELECTED_POSITION);
             mFromSavedInstanceState = true;
         }
@@ -110,9 +112,9 @@ public class NavigationDrawerFragment extends Fragment {
                 android.R.layout.simple_list_item_1,
                 android.R.id.text1,
                 new String[]{
-                        getString(R.string.title_section1),
-                        getString(R.string.title_section2),
-                        getString(R.string.title_section3),
+                        getString(R.string.configure),
+//                        getString(R.string.title_section2),
+//                        getString(R.string.title_section3),
                 }));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;
@@ -136,16 +138,12 @@ public class NavigationDrawerFragment extends Fragment {
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
         // set up the drawer's list view with items and click listener
 
-        ActionBar actionBar = getActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeButtonEnabled(true);
-
         // ActionBarDrawerToggle ties together the the proper interactions
         // between the navigation drawer and the action bar app icon.
         mDrawerToggle = new ActionBarDrawerToggle(
                 getActivity(),                    /* host Activity */
                 mDrawerLayout,                    /* DrawerLayout object */
-                R.drawable.ic_drawer,             /* nav drawer image to replace 'Up' caret */
+                R.drawable.contact_image,             /* nav drawer image to replace 'Up' caret */
                 R.string.navigation_drawer_open,  /* "open drawer" description for accessibility */
                 R.string.navigation_drawer_close  /* "close drawer" description for accessibility */
         ) {
@@ -175,6 +173,9 @@ public class NavigationDrawerFragment extends Fragment {
                     sp.edit().putBoolean(PREF_USER_LEARNED_DRAWER, true).apply();
                 }
 
+                ActionBar actionBar = getActionBar();
+                actionBar.setDisplayHomeAsUpEnabled(true);
+                actionBar.setHomeAsUpIndicator(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
                 getActivity().supportInvalidateOptionsMenu(); // calls onPrepareOptionsMenu()
             }
         };
@@ -209,20 +210,22 @@ public class NavigationDrawerFragment extends Fragment {
         }
 
         FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-        Toast.makeText(getActivity(), position+1 + "번 페이지로 이동", Toast.LENGTH_SHORT).show();
 
         switch (position) {
             case 0:
-                fragmentTransaction.replace(R.id.container, FragmentPage01.newInstance(position))
-                        .commit();
+                Intent intent = new Intent(getActivity(), ConfigurationActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                getActivity().startActivity(intent);
                 break;
             case 1:
                 fragmentTransaction.replace(R.id.container, FragmentPage02.newInstance(position))
                         .commit();
+                Log.i("clickPage", position + "");
                 break;
             case 2:
                 fragmentTransaction.replace(R.id.container, FragmentPage03.newInstance(position))
                         .commit();
+                Log.i("clickPage", position + "");
                 break;
 
         }
@@ -274,8 +277,8 @@ public class NavigationDrawerFragment extends Fragment {
             return true;
         }
 
-        if (item.getItemId() == R.id.action_example) {
-            Toast.makeText(getActivity(), "Example action.", Toast.LENGTH_SHORT).show();
+        if (item.getItemId() == R.id.refresh) {
+            Toast.makeText(getActivity(), "Refresh", Toast.LENGTH_SHORT).show();
             return true;
         }
 

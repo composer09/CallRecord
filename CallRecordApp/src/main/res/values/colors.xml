@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="color_press">#87ceeb</color>
+    <color name="color_no_press">#00000000</color>
+</resources>
