@@ -41,7 +41,7 @@ public class ConfigurationActivity extends AppCompatActivity {
 		recordTypeText.setText(preferenceManager.getRecordTypeText());
 		recordFormatText = (TextView)findViewById(R.id.record_format_text);
 		recordFormatText.setText(preferenceManager.getRecordFormatText());
-		CharSequence title = "설정";
+		CharSequence title = "Configure";
 		// 액션바 타이틀변경
 		ActionBar ab = this.getSupportActionBar();
 		ab.setTitle(title);

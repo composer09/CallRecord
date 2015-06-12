@@ -37,7 +37,7 @@ public class MainActivity extends ActionBarActivity
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
-        mTitle = "녹음목록";
+        mTitle = "Record List";
 
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(
