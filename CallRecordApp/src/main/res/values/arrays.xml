@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="type">
+        <item>전체녹음</item>
+        <item>내 목소리만</item>
+        <item>상대방 목소리만</item>
+    </string-array>
+    
+    <string-array name="format">
+        <item>MP4</item>
+        <item>3GP</item>
+    </string-array>
+
+</resources>

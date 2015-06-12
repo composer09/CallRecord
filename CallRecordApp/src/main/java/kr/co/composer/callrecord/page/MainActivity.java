@@ -31,7 +31,7 @@ public class MainActivity extends ActionBarActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.container, new MainFragment(), "mainFragment").commit();
+                .add(R.id.container, new HistoryFragment(), "hitoryFragment").commit();
 
         backPressClose = new BackPressClose(this);
 
@@ -50,18 +50,18 @@ public class MainActivity extends ActionBarActivity
         // update the main content by replacing fragments
 //        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
 //
-//        fragmentTransaction.replace(R.id.container, MainFragment.newInstance(position + 1))
+//        fragmentTransaction.replace(R.id.container, HistoryFragment.newInstance(position + 1))
 //                .commit();
 
 //             onBackPressed 활성시
-//             fragmentTransaction.replace(R.id.container, MainFragment.newInstance(position + 1))
+//             fragmentTransaction.replace(R.id.container, HistoryFragment.newInstance(position + 1))
 //                    .addToBackStack("flagBack").commit();
     }
 
     public void onSectionAttached(int number) {
         switch (number) {
             case 0:
-                mTitle = getString(R.string.title_section1);
+                mTitle = getString(R.string.configure);
                 break;
             case 1:
                 mTitle = getString(R.string.title_section2);
@@ -80,14 +80,14 @@ public class MainActivity extends ActionBarActivity
 //        ab.setDisplayHomeAsUpEnabled(true);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-        actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.drawable.abc_ic_menu_moreoverflow_mtrl_alpha);
         actionBar.setTitle(mTitle);
     }
 
     public void refresh(){
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.container, new MainFragment()).commit();
+                .replace(R.id.container, new HistoryFragment()).commit();
     }
 
 
@@ -103,7 +103,7 @@ public class MainActivity extends ActionBarActivity
             // if the drawer is not showing. Otherwise, let the drawer
             // decide what to show in the action bar.
             getMenuInflater().inflate(R.menu.main, menu);
-            restoreActionBar();
+                restoreActionBar();
             return true;
         }
         return super.onCreateOptionsMenu(menu);

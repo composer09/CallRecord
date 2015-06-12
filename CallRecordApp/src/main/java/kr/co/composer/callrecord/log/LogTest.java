@@ -3,8 +3,8 @@ package kr.co.composer.callrecord.log;
 import android.util.Log;
 
 public class LogTest {
-	public static void i(String tag, Object msg) {
-		Log.i(tag, msg.toString());
+	public static void i(Object tag, Object msg) {
+		Log.i(String.valueOf(tag), msg.toString());
 	}
 	
 	public static void i(String tag, String msg) {

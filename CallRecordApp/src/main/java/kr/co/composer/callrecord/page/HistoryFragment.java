@@ -28,7 +28,7 @@ import kr.co.composer.callrecord.dao.record.CallDAO;
 import kr.co.composer.callrecord.recorder.AudioRecorder;
 import kr.co.composer.callrecord.sharedpref.ConfigPreferenceManager;
 
-public class MainFragment extends Fragment {
+public class HistoryFragment extends Fragment {
 
     CallDAO callDAO;
 
@@ -54,11 +54,11 @@ public class MainFragment extends Fragment {
      * Returns a new instance of this fragment for the given section
      * number.
      */
-    public MainFragment() {
+    public HistoryFragment() {
     }
 
-    public static MainFragment newInstance(int sectionNumber, Context context) {
-        MainFragment fragment = new MainFragment();
+    public static HistoryFragment newInstance(int sectionNumber, Context context) {
+        HistoryFragment fragment = new HistoryFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_SECTION_NUMBER, sectionNumber);
         fragment.setArguments(args);
@@ -100,7 +100,9 @@ public class MainFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long positionL) {
                 File fileName = callDAO.selectFile(view.getId());
-                Intent audioStartIntent = new Intent(android.content.Intent.ACTION_VIEW);
+                Intent audioStartIntent = new Intent();
+                audioStartIntent.setAction(Intent.ACTION_VIEW);
+//                Intent audioStartIntent = new Intent(android.content.Intent.ACTION_VIEW);
                 audioStartIntent.setDataAndType(Uri.fromFile(fileName), "audio/*");
                 getActivity().startActivity(audioStartIntent);
             }
@@ -141,7 +143,7 @@ public class MainFragment extends Fragment {
                                 historyAdapter.remove(selecteditem);
                             }
                         }
-                                getFragmentManager().beginTransaction().replace(R.id.container,new MainFragment()).commit();
+                                getFragmentManager().beginTransaction().replace(R.id.container,new HistoryFragment()).commit();
                         // Close CAB
                         mode.finish();
                         return true;
@@ -153,6 +155,7 @@ public class MainFragment extends Fragment {
                         return false;
                 }
             }
+
 
 
             @Override
