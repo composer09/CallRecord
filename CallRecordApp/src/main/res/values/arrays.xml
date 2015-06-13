@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string-array name="nav_items">
+        <item>Configure</item>
+    </string-array>
     <string-array name="type">
         <item>전체녹음</item>
         <item>내 목소리만</item>
