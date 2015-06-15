@@ -12,7 +12,7 @@ public class CallInfoPreferenceManager extends AbstractPreferenceManager{
 	public static final String NAME = "NumberName";
 	public static final String SENDING = "sending";
 	public static final String CALL_STATE = "callState";
-	public static final String CONTACT_ID = "contactId";
+	public static final String PHOTO_ID = "photoId";
 	
 	public static synchronized CallInfoPreferenceManager getInstance() {
 		if (mSelfInstance == null) {
@@ -41,7 +41,7 @@ public class CallInfoPreferenceManager extends AbstractPreferenceManager{
 	}
 	
 	public void setCallTime(String time){
-		setStringValue(CALL_TIME,time);
+		setStringValue(CALL_TIME, time);
 	}
 	
 	public void setPhoneNumber(String number){
@@ -51,15 +51,18 @@ public class CallInfoPreferenceManager extends AbstractPreferenceManager{
 	public void setName(String name){
 		setStringValue(NAME, name);
 	}
-	
+
 	public void setSending(String name){
 		setStringValue(SENDING, name);
 	}
-	
+
 	public void setCallState(boolean state){
 		setBooleanValue(CALL_STATE, state);
 	}
-	
+
+	public void setPhotoId(int photoId){
+		setIntValue(PHOTO_ID, photoId);
+	}
 //	public long getStartDate(){
 //		return getLongValue(START_DATE, 0L);
 //	}
@@ -95,5 +98,8 @@ public class CallInfoPreferenceManager extends AbstractPreferenceManager{
 	public boolean getCallState(){
 		return getBooleanValue(CALL_STATE, true);
 	}
-	
+
+	public int getPhotoId(){
+		return getIntValue(PHOTO_ID, 0);
+	}
 }

@@ -4,8 +4,6 @@ public class Call {
 	
 	private int rowId;
 	
-	private int callerID;
-	
 	// 전화한 사람이름
 	private String callerName;
 	
@@ -29,6 +27,8 @@ public class Call {
 	
 	// 녹음파일 이름
 	private String fileName;
+
+	private int photoId;
 	
 	public int getRowId() {
 		return rowId;
@@ -92,6 +92,14 @@ public class Call {
 	
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
+	}
+
+	public int getPhotoId() {
+		return photoId;
+	}
+
+	public void setPhotoId(int photoId){
+		this.photoId = photoId;
 	}
 
 	public String getOutgoingCallDate() {

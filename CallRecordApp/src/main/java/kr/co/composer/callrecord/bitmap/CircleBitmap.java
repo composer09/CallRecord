@@ -19,20 +19,33 @@ import java.io.InputStream;
 /**
  * Created by composer on 2015-06-11.
  */
-public class CircleBitmap extends AsyncTask<Bitmap, Void, Void> {
+public class CircleBitmap extends AsyncTask<Bitmap, Void, Bitmap> {
     Context context;
-    Bitmap bitmap;
 
     CircleBitmap(Context context, Bitmap bitmap) {
         this.context = context;
-        this.bitmap = bitmap;
     }
 
     @Override
-    public Void doInBackground(Bitmap... params) {
+    public Bitmap doInBackground(Bitmap... params) {
+        Bitmap output = Bitmap.createBitmap(params[0].getWidth(), params[0].getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(output);
+        final int color = 0xff424242;
+        final Paint paint = new Paint();
+        final Rect rect = new Rect(0, 0, params[0].getWidth(), params[0].getHeight());
+        paint.setAntiAlias(true);
+        canvas.drawARGB(0, 0, 0, 0);
+        paint.setColor(color);
+        int size = (params[0].getWidth() / 2);
+        canvas.drawCircle(size, size, size, paint);
+        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+        canvas.drawBitmap(params[0], rect, rect, paint);
+        return output;
+    }
 
-
-        return null;
+    @Override
+    protected void onPostExecute(Bitmap bitmap) {
+        super.onPostExecute(bitmap);
     }
 
     private Bitmap getCircleBitmap(Bitmap bitmap) {

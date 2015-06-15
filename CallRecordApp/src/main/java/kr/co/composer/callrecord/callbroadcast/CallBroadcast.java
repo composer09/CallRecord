@@ -71,6 +71,7 @@ public class CallBroadcast extends BroadcastReceiver {
                                     ContactsContract.PhoneLookup.CONTENT_FILTER_URI,
                                     Uri.encode(callInfoPreferenceManager.getPhoneNumber()));
                             projection = new String[]{ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME
+                                    , ContactsContract.Contacts.PHOTO_ID
                             };
 
                             // Query the filter URI
@@ -81,7 +82,14 @@ public class CallBroadcast extends BroadcastReceiver {
 //								callInfoPreferenceManager.setName(cursor.getString(0));
                                     callInfoPreferenceManager.setName(cursor.getString(cursor.getColumnIndex
                                             (ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)));
-                                }else {
+                                    int id = cursor.getInt(cursor.getColumnIndex(ContactsContract.Contacts.PHOTO_ID));
+                                    if (id != 0) {
+                                        callInfoPreferenceManager.setPhotoId(id);
+                                    } else {
+                                        callInfoPreferenceManager.setPhotoId(1);
+                                    }
+                                } else {
+                                    callInfoPreferenceManager.setPhotoId(1);
                                     callInfoPreferenceManager.setName("알수없음");
                                 }
                             }
@@ -127,6 +135,7 @@ public class CallBroadcast extends BroadcastReceiver {
                                     callInfoPreferenceManager.getStartDate(),
                                     totalTime,
                                     callInfoPreferenceManager.getSending(),
+                                    callInfoPreferenceManager.getPhotoId(),
                                     callInfoPreferenceManager.getStartDate()
                                             + configPreferenceManager.getPathFormat());
                             callDAO.close();
