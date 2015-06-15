@@ -86,6 +86,7 @@
     </FrameLayout>
 
     <RelativeLayout
+        android:layout_alignParentBottom="true"
         android:layout_width="fill_parent"
         android:layout_height="2.333dp" >
 
