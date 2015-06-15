@@ -229,23 +229,5 @@ public class HistoryAdapter extends BaseAdapter {
         return getCircleBitmap(BitmapFactory.decodeStream(input));
     }
 
-//	private Bitmap getThumbnailV2(int thumbnailId, Context context) {
-//	String[] PHOTO_BITMAP_PROJECTION = new String[] {
-//	    ContactsContract.CommonDataKinds.Photo.PHOTO};
-//	
-//    Uri uri = ContentUris.withAppendedId(ContactsContract.Data.CONTENT_URI, thumbnailId);
-//    Cursor cursor = context.getContentResolver().query(uri, PHOTO_BITMAP_PROJECTION, null, null, null);
-//
-//        Bitmap thumbnail = null;
-//        if (cursor.moveToFirst()) {
-//            byte[] thumbnailBytes = cursor.getBlob(0);
-//            if (thumbnailBytes != null) {
-//                thumbnail = BitmapFactory.decodeByteArray(thumbnailBytes, 0, thumbnailBytes.length);
-//                bitmap = getCircleBitmap(thumbnail);
-//            }
-//        }
-//        cursor.close();
-//        return bitmap;
-//}
 
 }
