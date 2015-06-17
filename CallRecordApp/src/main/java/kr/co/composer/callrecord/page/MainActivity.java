@@ -6,6 +6,9 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import kr.co.composer.callrecord.R;
 import kr.co.composer.callrecord.function.BackPressClose;
@@ -83,7 +86,9 @@ public class MainActivity extends ActionBarActivity
         actionBar.setTitle(mTitle);
     }
 
-    public void refresh(){
+    public void refresh(View aniItem){
+        Animation ani = AnimationUtils.loadAnimation(this, R.anim.rotate);
+        aniItem.startAnimation(ani);
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container, new HistoryFragment()).commit();
     }
@@ -113,9 +118,9 @@ public class MainActivity extends ActionBarActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
+        View aniItem = findViewById(R.id.refresh);
         if(id == R.id.refresh){
-            refresh();
+            refresh(aniItem);
         }
 
         //noinspection SimplifiableIfStatement

@@ -32,13 +32,14 @@ public class CallDAO {
 	
 	
 	public void insert(String name, String number, String startTime, String callTime, String sendReceive
-			,String fileName) {
+			, int photoId, String fileName) {
 		ContentValues contVal = new ContentValues();
 		contVal.put(CallDatabaseHelper.NAME, name);
 		contVal.put(CallDatabaseHelper.PHONE_NUMBER, number);
 		contVal.put(CallDatabaseHelper.START_TIME, startTime);
 		contVal.put(CallDatabaseHelper.CALL_TIME, callTime);
 		contVal.put(CallDatabaseHelper.SEND_RECEIVE, sendReceive);
+		contVal.put(CallDatabaseHelper.PHOTO_ID, photoId);
 		contVal.put(CallDatabaseHelper.FILE_NAME, fileName);
 		db = callDatabaseHelper.getWritableDatabase();
 		db.insert(CallDatabaseHelper.TABLE_NAME, null, contVal);
@@ -121,6 +122,9 @@ public class CallDAO {
 				
 				columnIndex = cursor.getColumnIndex(CallDatabaseHelper.SEND_RECEIVE);
 				call.setSendReceive(cursor.getString(columnIndex));
+
+				columnIndex = cursor.getColumnIndex(CallDatabaseHelper.PHOTO_ID);
+				call.setPhotoId(cursor.getInt(columnIndex));
 
 				columnIndex = cursor.getColumnIndex(CallDatabaseHelper.FILE_NAME);
 				call.setFileName(cursor.getString(columnIndex));
