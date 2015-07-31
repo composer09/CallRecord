@@ -45,10 +45,6 @@ public class HistoryAdapter extends BaseAdapter {
 
     private SparseBooleanArray mSelectedItemsIds;
 
-    ImageView imageView;
-
-    int photoId;
-
     public HistoryAdapter(Context context, int layout, ArrayList<Call> arraySrc) {
         this.context = context;
         inflater = (LayoutInflater) context
@@ -127,47 +123,43 @@ public class HistoryAdapter extends BaseAdapter {
 
 
     public View getView(int position, View convertView, ViewGroup parentView) {
+        CallViewHolder holder;
         if (convertView == null) {
             convertView = inflater.inflate(layout, parentView, false);
+            holder = new CallViewHolder();
+            holder.imageView = (ImageView) convertView.findViewById(R.id.caller_image);
+            holder.name = (TextView) convertView.findViewById(R.id.caller_name_list);
+            holder.time = (TextView) convertView.findViewById(R.id.call_time_list);
+            holder.sending = (TextView) convertView.findViewById(R.id.sending);
+            holder.number = (TextView) convertView.findViewById(R.id.phone_number_list);
+            holder.startTime = (TextView) convertView.findViewById(R.id.start_time);
+            convertView.setTag(holder);
+        } else {
+            holder = (CallViewHolder)convertView.getTag();
         }
 
 
-        if(arraySrc.get(position).getPhotoId() != 1){
-            imageView = (ImageView)convertView.findViewById(R.id.caller_image);
-            imageView.setImageBitmap(getThumbnail(arraySrc.get(position).getPhotoId()));
-        }else if(arraySrc.get(position).getPhotoId() == 1){
+        if (arraySrc.get(position).getPhotoId() != 1) {
+            holder.imageView.setImageBitmap(getThumbnail(arraySrc.get(position).getPhotoId()));
+        } else if (arraySrc.get(position).getPhotoId() == 1) {
             Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.contact_image);
-            imageView = (ImageView)convertView.findViewById(R.id.caller_image);
-            imageView.setImageBitmap(getCircleBitmap(bitmap));
+            holder.imageView.setImageBitmap(getCircleBitmap(bitmap));
         }
 
-        TextView name = (TextView) convertView
-                .findViewById(R.id.caller_name_list);
-        name.setText(arraySrc.get(position).getCallerName());
-        TextView time = (TextView) convertView
-                .findViewById(R.id.call_time_list);
-        time.setText(arraySrc.get(position).getCallTime());
+        holder.name.setText(arraySrc.get(position).getCallerName());
+        holder.time.setText(arraySrc.get(position).getCallTime());
 
-        TextView sending = (TextView) convertView.findViewById(R.id.sending);
         String sendReceive = arraySrc.get(position).getsendReceive();
         if (sendReceive.equals("true")) {
             sendReceive = "발신";
         } else {
             sendReceive = "수신";
         }
-        sending.setText(sendReceive);
-
-        TextView number = (TextView) convertView
-                .findViewById(R.id.phone_number_list);
-        number.setText(arraySrc.get(position).getPhoneNumber());
-
-        TextView startTime = (TextView) convertView
-                .findViewById(R.id.start_time);
-        startTime.setText(arraySrc.get(position).getStartTime());
+        holder.sending.setText(sendReceive);
+        holder.number.setText(arraySrc.get(position).getPhoneNumber());
+        holder.startTime.setText(arraySrc.get(position).getStartTime());
 
         convertView.setId(arraySrc.get(position).getRowId());
-        call = getItem(position);
-        convertView.setTag(call);
 
         return convertView;
     }
