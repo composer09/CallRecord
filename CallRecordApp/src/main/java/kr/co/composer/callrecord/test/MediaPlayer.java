@@ -66,7 +66,7 @@ public class MediaPlayer extends Activity {
         mediaPlayer.start();
         timeElapsed = mediaPlayer.getCurrentPosition();
         seekbar.setProgress((int) timeElapsed);
-        durationHandler.postDelayed(updateSeekBarTime, 100);
+        durationHandler.postDelayed(updateSeekBarTime, 200);
     }
 
     // play mp3 song
@@ -76,9 +76,10 @@ public class MediaPlayer extends Activity {
             playBtn.setImageResource(R.drawable.ic_media_pause);
             timeElapsed = mediaPlayer.getCurrentPosition();
             seekbar.setProgress((int) timeElapsed);
-            durationHandler.postDelayed(updateSeekBarTime, 100);
+            durationHandler.postDelayed(updateSeekBarTime, 200);
         } else {
             mediaPlayer.pause();
+            durationHandler.removeMessages(0);
             playBtn.setImageResource(R.drawable.ic_media_play);
         }
     }
@@ -99,8 +100,8 @@ public class MediaPlayer extends Activity {
             double timeRemaining = finalTime - timeElapsed;
             duration.setText(String.format("%d min, %d sec", TimeUnit.MILLISECONDS.toMinutes((long) timeRemaining), TimeUnit.MILLISECONDS.toSeconds((long) timeRemaining) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long) timeRemaining))));
 
-            //repeat yourself that again in 100 miliseconds
-            durationHandler.postDelayed(this, 100);
+            //repeat yourself that again in 200 miliseconds
+            durationHandler.postDelayed(this, 200);
         }
     };
 
@@ -127,18 +128,25 @@ public class MediaPlayer extends Activity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        durationHandler.postDelayed(updateSeekBarTime, 200);
+    }
+
+    @Override
     protected void onStop() {
         super.onStop();
         if (mediaPlayer != null) {
             mediaPlayer.pause();
             playBtn.setImageResource(R.drawable.ic_media_play);
+            durationHandler.removeMessages(0);
         }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        durationHandler.removeMessages(0);
+        mediaPlayer.reset();
         mediaPlayer.release();
     }
 
