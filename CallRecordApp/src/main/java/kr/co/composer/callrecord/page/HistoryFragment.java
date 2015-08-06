@@ -27,6 +27,7 @@ import kr.co.composer.callrecord.callhistory.HistoryAdapter;
 import kr.co.composer.callrecord.dao.record.CallDAO;
 import kr.co.composer.callrecord.recorder.AudioRecorder;
 import kr.co.composer.callrecord.sharedpref.ConfigPreferenceManager;
+import kr.co.composer.callrecord.test.MediaPlayer;
 
 public class HistoryFragment extends Fragment {
 
@@ -77,7 +78,7 @@ public class HistoryFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 //        init();
-        View rootView = inflater.inflate(R.layout.call_history_activity, container, false);
+        View rootView = inflater.inflate(R.layout.activity_call_history, container, false);
 
 //		액션바 타이틀변경
 //            ActionBar ab = getActivity().getActionBar();
@@ -100,11 +101,18 @@ public class HistoryFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long positionL) {
                 File fileName = callDAO.selectFile(view.getId());
-                Intent audioStartIntent = new Intent();
-                audioStartIntent.setAction(Intent.ACTION_VIEW);
-//                Intent audioStartIntent = new Intent(android.content.Intent.ACTION_VIEW);
-                audioStartIntent.setDataAndType(Uri.fromFile(fileName), "audio/*");
-                getActivity().startActivity(audioStartIntent);
+
+
+//                Intent audioStartIntent = new Intent();
+//                audioStartIntent.setAction(Intent.ACTION_VIEW);
+//                audioStartIntent.setDataAndType(Uri.fromFile(fileName), "audio/*");
+//                getActivity().startActivity(audioStartIntent);
+
+                Intent audioStartIntent = new Intent(getActivity(), MediaPlayer.class);
+                audioStartIntent.putExtra("fileName",fileName.toString());
+                startActivity(audioStartIntent);
+
+
             }
 
         });

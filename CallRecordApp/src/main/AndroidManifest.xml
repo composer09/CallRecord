@@ -29,8 +29,14 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".page.ConfigurationActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".page.ConfigurationActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".test.MediaPlayer"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Dialog" />
 
         <receiver android:name="kr.co.composer.callrecord.callbroadcast.CallBroadcast">
             <intent-filter>

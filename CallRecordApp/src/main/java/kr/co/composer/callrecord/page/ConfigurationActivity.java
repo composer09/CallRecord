@@ -27,7 +27,7 @@ public class ConfigurationActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.configuratioin_main);
+		setContentView(R.layout.activity_configuratioin);
 		preferenceManager = ConfigPreferenceManager.getInstance();
 		init();
 
