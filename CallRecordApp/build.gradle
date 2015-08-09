@@ -7,7 +7,7 @@ android {
     defaultConfig {
         applicationId "kr.co.composer.callrecord"
         minSdkVersion 15
-        targetSdkVersion 19
+        targetSdkVersion 22
         versionCode 1
         versionName "1.0"
     }
