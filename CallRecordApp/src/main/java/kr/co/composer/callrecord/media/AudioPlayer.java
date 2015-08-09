@@ -1,4 +1,4 @@
-package kr.co.composer.callrecord.test;
+package kr.co.composer.callrecord.media;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
 import kr.co.composer.callrecord.R;
 
 
-public class MediaPlayer extends Activity {
+public class AudioPlayer extends Activity {
 
 
     private android.media.MediaPlayer mediaPlayer;

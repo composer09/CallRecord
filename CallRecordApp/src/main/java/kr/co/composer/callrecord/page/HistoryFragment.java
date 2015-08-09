@@ -3,7 +3,6 @@ package kr.co.composer.callrecord.page;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.SparseBooleanArray;
@@ -27,7 +26,7 @@ import kr.co.composer.callrecord.callhistory.HistoryAdapter;
 import kr.co.composer.callrecord.dao.record.CallDAO;
 import kr.co.composer.callrecord.recorder.AudioRecorder;
 import kr.co.composer.callrecord.sharedpref.ConfigPreferenceManager;
-import kr.co.composer.callrecord.test.MediaPlayer;
+import kr.co.composer.callrecord.media.AudioPlayer;
 
 public class HistoryFragment extends Fragment {
 
@@ -108,7 +107,7 @@ public class HistoryFragment extends Fragment {
 //                audioStartIntent.setDataAndType(Uri.fromFile(fileName), "audio/*");
 //                getActivity().startActivity(audioStartIntent);
 
-                Intent audioStartIntent = new Intent(getActivity(), MediaPlayer.class);
+                Intent audioStartIntent = new Intent(getActivity(), AudioPlayer.class);
                 audioStartIntent.putExtra("fileName",fileName.toString());
                 startActivity(audioStartIntent);
 

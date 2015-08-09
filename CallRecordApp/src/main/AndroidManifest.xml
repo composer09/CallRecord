@@ -34,7 +34,7 @@
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".test.MediaPlayer"
+            android:name=".media.AudioPlayer"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Dialog" />
 
