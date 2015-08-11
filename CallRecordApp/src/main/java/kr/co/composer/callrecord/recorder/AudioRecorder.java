@@ -44,7 +44,7 @@ public class AudioRecorder {
 
 		    mediaRecorder.setAudioSource(configPreferenceManager.getRecordType());
 		    mediaRecorder.setOutputFormat(configPreferenceManager.getRecordFormat());
-		    mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+		    mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
 		    mediaRecorder.setOutputFile(fileName);
 		    mediaRecorder.prepare();
 		    mediaRecorder.start();

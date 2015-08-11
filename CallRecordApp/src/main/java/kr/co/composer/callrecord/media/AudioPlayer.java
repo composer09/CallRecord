@@ -48,13 +48,12 @@ public class AudioPlayer extends Activity {
         duration = (TextView) findViewById(R.id.songDuration);
         seekbar = (SeekBar) findViewById(R.id.seekBar);
         playBtn = (ImageButton) findViewById(R.id.media_play);
-
-
         try {
             mediaPlayer = new android.media.MediaPlayer();
             mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
             mediaPlayer.setDataSource(fName);
             mediaPlayer.prepare();
+//            mediaPlayer.prepareAsync();
         } catch (IOException e) {
             e.printStackTrace();
         }

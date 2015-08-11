@@ -70,10 +70,11 @@ public class CallDAO {
 			}
 //			File file = new File(fileName);
 			
-//			File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/callrecord/" 
-//					+fileName);
-			File file = new File(Environment.getExternalStorageDirectory().getPath() + "/callrecord/" 
+			File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/callrecord/"
 					+fileName);
+
+//			File file = new File(Environment.getExternalStorageDirectory().getPath() + "/callrecord/"
+//					+fileName);
 			return file;
 	}
 	
