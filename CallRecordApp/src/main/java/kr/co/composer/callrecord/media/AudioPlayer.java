@@ -53,7 +53,6 @@ public class AudioPlayer extends Activity {
             mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
             mediaPlayer.setDataSource(fName);
             mediaPlayer.prepare();
-//            mediaPlayer.prepareAsync();
         } catch (IOException e) {
             e.printStackTrace();
         }
