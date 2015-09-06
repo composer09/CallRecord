@@ -36,7 +36,7 @@
         <activity
             android:name=".media.AudioPlayer"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Dialog" />
+            android:theme="@android:style/Theme.Holo.Dialog.NoActionBar" />
 
         <receiver android:name="kr.co.composer.callrecord.callbroadcast.CallBroadcast">
             <intent-filter>

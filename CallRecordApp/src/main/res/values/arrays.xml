@@ -11,8 +11,8 @@
     </string-array>
     
     <string-array name="format">
-        <item>MP4</item>
         <item>3GP</item>
+        <item>MP4</item>
     </string-array>
 
 </resources>

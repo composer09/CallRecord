@@ -6,7 +6,7 @@ public class ConfigPreferenceManager extends AbstractPreferenceManager {
 	private static ConfigPreferenceManager mSelfInstance = null;
 	
 	public static final String AUTO_ON_OFF = "auto_onOff";
-	public static final String RECORD_FORMAT = "recordFormat";
+	public static final String OUTPUT_FORMAT = "recordFormat";
 	public static final String RECORD_TYPE = "recordType";
 	public static final String RECORD_TYPE_TEXT = "recordTypeText";
 	public static final String RECORD_FORMAT_TEXT = "recordFormatText";
@@ -34,8 +34,8 @@ public class ConfigPreferenceManager extends AbstractPreferenceManager {
 		setStringValue(RECORD_TYPE_TEXT, type);
 	}
 	
-	public void setRecordFormat(int format){
-		setIntValue(RECORD_FORMAT, format);
+	public void setOutputFormat(int format){
+		setIntValue(OUTPUT_FORMAT, format);
 	}
 
 	public void setRecordFormatText(String type){
@@ -65,12 +65,12 @@ public class ConfigPreferenceManager extends AbstractPreferenceManager {
 		return getStringValue(RECORD_TYPE_TEXT, "전체녹음");
 	}
 	
-	public int getRecordFormat(){
-		return getIntValue(RECORD_FORMAT, MediaRecorder.OutputFormat.MPEG_4);
+	public int getOutputFormat(){
+		return getIntValue(OUTPUT_FORMAT, MediaRecorder.OutputFormat.THREE_GPP);
 	}
 
 	public String getRecordFormatText(){
-		return getStringValue(RECORD_FORMAT_TEXT, "MP4");
+		return getStringValue(RECORD_FORMAT_TEXT, "3GP");
 	}
 	
 	public String getPathFormat(){

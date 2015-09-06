@@ -33,7 +33,7 @@ public class AudioPlayer extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_media_player);
+        setContentView(R.layout.activity_audio_player);
 
         //바깥 영역 누름 방지
         setFinishOnTouchOutside(false);

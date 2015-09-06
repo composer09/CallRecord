@@ -118,12 +118,12 @@ public class ConfigurationActivity extends AppCompatActivity {
 						recordFormatText.setText(format[which]);
 						preferenceManager.setRecordFormatText(format[which]);
 						switch (format[which]){
-						case "MP4": preferenceManager.setRecordFormat(MediaRecorder.OutputFormat.MPEG_4);
-									preferenceManager.setPathFormat(".mp4");
-						
-						break;
-						case "3GP":	preferenceManager.setRecordFormat(MediaRecorder.OutputFormat.THREE_GPP);
+						case "3GP":	preferenceManager.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
 									preferenceManager.setPathFormat(".3gp");
+						break;
+						case "MP4": preferenceManager.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
+									preferenceManager.setPathFormat(".mp4");
+
 						break;
 						}
 									
