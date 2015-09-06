@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageButton;
@@ -100,6 +101,11 @@ public class AudioPlayer extends Activity {
 
             //repeat yourself that again in 200 miliseconds
             durationHandler.postDelayed(this, 200);
+            //실행파일 마지막까지 읽으면 플레이어 종료
+            if(!mediaPlayer.isPlaying()){
+                mediaPlayer.stop();
+                AudioPlayer.this.finish();
+            }
         }
     };
 
